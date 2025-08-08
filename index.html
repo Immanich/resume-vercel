@@ -888,18 +888,46 @@
       }
 
       @media (max-width: 768px) {
+        .footer {
+          padding: 1.5rem 1rem;
+        }
+        .footer-content {
+          font-size: 0.8rem;
+        }
+
         .hello-text {
           font-size: 3rem;
-          letter-spacing: 0.3rem;
+          letter-spacing: 0.2rem;
+          margin-bottom: 1.5rem;
         }
+
         .name-intro {
-          font-size: 2rem;
+          font-size: 1.8rem;
+          transform: translateY(30px); /* Smaller movement for mobile */
+          margin-bottom: 1rem;
         }
+
         .title-intro {
-          font-size: 1.2rem;
+          font-size: 1rem;
+          transform: translateX(50px); /* Smaller movement for mobile */
+          letter-spacing: 0.2rem;
         }
         .skills-container {
           flex-direction: column;
+        }
+      }
+
+      @media (max-width: 375px) {
+        .hello-text {
+          font-size: 2.5rem;
+        }
+
+        .name-intro {
+          font-size: 1.5rem;
+        }
+
+        .title-intro {
+          font-size: 0.9rem;
         }
       }
 
@@ -1032,6 +1060,8 @@
         background-color: var(--secondary);
         z-index: 9999;
         pointer-events: none;
+        padding: 0 20px; /* Added padding for mobile */
+        box-sizing: border-box; /* Ensure padding is included in width */
       }
 
       .hello-text {
@@ -1043,6 +1073,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.5rem;
+        text-align: center; /* Ensure text stays centered */
       }
 
       .name-intro {
@@ -1053,6 +1084,8 @@
         animation: slideUp 1s ease-in-out 1.5s forwards;
         font-weight: 500;
         margin-bottom: 1.5rem;
+        text-align: center;
+        line-height: 1.2; /* Better line spacing */
       }
 
       .title-intro {
@@ -1063,6 +1096,7 @@
         animation: slideLeft 1s ease-in-out 2.5s forwards;
         text-transform: uppercase;
         letter-spacing: 0.3rem;
+        text-align: center;
       }
 
       @keyframes fadeIn {
@@ -1104,6 +1138,28 @@
       }
       .tech-link:hover {
         color: #005bb5; /* Darker shade on hover */
+      }
+
+      .footer {
+        color: var(--text);
+        padding: 1.5rem;
+        text-align: center;
+        width: 100%;
+        position: relative;
+        left: 0;
+        margin-top: 2rem;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+      }
+
+      .footer:hover .footer-content {
+        opacity: 1;
       }
     </style>
   </head>
@@ -1359,159 +1415,6 @@
               </div>
             </div>
           </section>
-
-          <!-- <section class="section">
-            <h2 class="section-title">
-              <i class="fas fa-code"></i> TECHNICAL SKILLS
-            </h2>
-            <div class="skills-container">
-              <div class="skill-category">
-                <div class="skill-item" style="--rating: 80%">
-                  <div class="skill-name">
-                    <span>HTML</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">8/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 80%">
-                  <div class="skill-name">
-                    <span>CSS</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">8/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 40%">
-                  <div class="skill-name">
-                    <span>JavaScript</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">4/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 50%">
-                  <div class="skill-name">
-                    <span>TypeScript</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">5/10</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="skill-category">
-                <div class="skill-item" style="--rating: 40%">
-                  <div class="skill-name">
-                    <span>Java</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 70%">
-                  <div class="skill-name">
-                    <span>Dart</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">7/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 70%">
-                  <div class="skill-name">
-                    <span>Flutter</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">7/10</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="skill-category">
-                <div class="skill-item" style="--rating: 30%">
-                  <div class="skill-name">
-                    <span>PHP</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">3/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 85%">
-                  <div class="skill-name">
-                    <span>Laravel (Blade)</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">8.5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 70%">
-                  <div class="skill-name">
-                    <span>Inertia.js</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">7/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 65%">
-                  <div class="skill-name">
-                    <span>Vue.js</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">6.5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 65%">
-                  <div class="skill-name">
-                    <span>React</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">6.5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 70%">
-                  <div class="skill-name">
-                    <span>MySQL</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">7/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 40%">
-                  <div class="skill-name">
-                    <span>Firebase</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">4/10</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section> -->
         </div>
 
         <!-- Main content -->
@@ -1631,6 +1534,10 @@
           </section>
         </div>
       </div>
+
+      <footer class="footer">
+        &copy; 2025 Lord Immanuel S. Juanich. <br />All rights reserved.
+      </footer>
     </div>
 
     <script>
