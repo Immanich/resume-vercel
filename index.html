@@ -8,6 +8,12 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         --primary: #1e293b;
@@ -319,6 +325,17 @@
       .contact-item:hover {
         background-color: var(--hover-bg);
         transform: translateX(5px);
+      }
+
+      .contact-item.clickable:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+        cursor: pointer; /* This changes to hand cursor */
+      }
+
+      /* Non-clickable items (like address) keep default cursor */
+      .contact-item:not(.clickable):hover {
+        cursor: default;
       }
 
       .light-mode .contact-item:hover {
@@ -871,9 +888,38 @@
       }
 
       @media (max-width: 768px) {
+        .hello-text {
+          font-size: 3rem;
+          letter-spacing: 0.3rem;
+        }
+        .name-intro {
+          font-size: 2rem;
+        }
+        .title-intro {
+          font-size: 1.2rem;
+        }
         .skills-container {
           flex-direction: column;
         }
+      }
+
+      .skill-group-title {
+        color: var(--accent);
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+      }
+
+      .skill-group-title::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background-color: var(--accent);
       }
 
       .skills-container {
@@ -971,9 +1017,103 @@
       .pulse {
         animation: pulse 3s ease-in-out infinite;
       }
+
+      /* Animation styles for the intro sequence */
+      .intro-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--secondary);
+        z-index: 9999;
+        pointer-events: none;
+      }
+
+      .hello-text {
+        font-size: 5rem;
+        color: var(--accent);
+        opacity: 0;
+        animation: fadeIn 1.5s ease-in-out forwards;
+        margin-bottom: 2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5rem;
+      }
+
+      .name-intro {
+        font-size: 3rem;
+        color: var(--text);
+        transform: translateY(50px);
+        opacity: 0;
+        animation: slideUp 1s ease-in-out 1.5s forwards;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+      }
+
+      .title-intro {
+        font-size: 1.5rem;
+        color: var(--accent);
+        transform: translateX(100px);
+        opacity: 0;
+        animation: slideLeft 1s ease-in-out 2.5s forwards;
+        text-transform: uppercase;
+        letter-spacing: 0.3rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideLeft {
+        from {
+          transform: translateX(100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .tech-link {
+        text-decoration: none;
+        color: #0073e6; /* Professional blue */
+        font-weight: 500;
+        transition: color 0.2s ease-in-out;
+      }
+      .tech-link:hover {
+        color: #005bb5; /* Darker shade on hover */
+      }
     </style>
   </head>
   <body>
+    <div class="intro-container" id="introContainer">
+      <div class="hello-text">HELLO</div>
+      <div class="name-intro">Lord Immanuel S. Juanich</div>
+      <div class="title-intro">SOFTWARE DEVELOPER</div>
+    </div>
+
     <div class="container">
       <!-- Terminal-like header -->
       <header>
@@ -1002,7 +1142,6 @@
                 src="2by2(edited).png"
                 alt="Lord Immanuel S. Juanich"
                 class="profile-img"
-                onclick="window.open('2by2(edited).png', '_blank')"
               />
             </div>
             <h1 class="name">Lord Immanuel S. Juanich</h1>
@@ -1021,33 +1160,211 @@
           <div class="contact-info">
             <h3>CONTACT</h3>
             <div
-              class="contact-item"
+              class="contact-item clickable"
               onclick="navigator.clipboard.writeText('09104184566')"
             >
               <div class="contact-icon"><i class="fas fa-phone"></i></div>
               <div>0910-418-4566</div>
             </div>
             <div
-              class="contact-item"
+              class="contact-item clickable"
               onclick="navigator.clipboard.writeText('immanichj@gmail.com')"
             >
               <div class="contact-icon"><i class="fas fa-envelope"></i></div>
               <div>immanichj@gmail.com</div>
             </div>
-            <div class="contact-item">
+            <div class="contact-item clickable">
               <div class="contact-icon">
                 <i class="fas fa-map-marker-alt"></i>
               </div>
               <div>Tubigon, Bohol</div>
             </div>
+            <div
+              class="contact-item clickable"
+              onclick="window.open('https://www.facebook.com/immanich', '_blank')"
+            >
+              <div class="contact-icon"><i class="fab fa-facebook"></i></div>
+              <div>Facebook</div>
+            </div>
+            <div
+              class="contact-item clickable"
+              onclick="window.open('https://www.linkedin.com/in/immanich/', '_blank')"
+            >
+              <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+              <div>LinkedIn</div>
+            </div>
           </div>
 
           <section class="section">
+            <h2 class="section-title"><i class="fas fa-code"></i>SKILLS</h2>
+            <div class="skills-container">
+              <div class="skill-category">
+                <div class="skill-item" style="--rating: 80%">
+                  <div class="skill-name">
+                    <span>HTML</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">8/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 80%">
+                  <div class="skill-name">
+                    <span>CSS</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">8/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 50%">
+                  <div class="skill-name">
+                    <span>JavaScript</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">5/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 50%">
+                  <div class="skill-name">
+                    <span>TypeScript</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">5/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 40%">
+                  <div class="skill-name">
+                    <span>Java</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">5/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 70%">
+                  <div class="skill-name">
+                    <span>Dart</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">7/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 30%">
+                  <div class="skill-name">
+                    <span>PHP</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">3/10</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Column 2 - Frameworks -->
+              <div class="skill-category">
+                <h3 class="skill-group-title">Frameworks & Libraries</h3>
+                <div class="skill-item" style="--rating: 70%">
+                  <div class="skill-name">
+                    <span>Flutter</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">7/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 85%">
+                  <div class="skill-name">
+                    <span>Laravel(Blade)</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">8.5/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 65%">
+                  <div class="skill-name">
+                    <span>Inertia.js</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">6.5/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 65%">
+                  <div class="skill-name">
+                    <span>Vue.js</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">6.5/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 65%">
+                  <div class="skill-name">
+                    <span>React</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">6.5/10</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Column 3 - Databases & Others -->
+              <div class="skill-category">
+                <h3 class="skill-group-title">Databases</h3>
+                <div class="skill-item" style="--rating: 70%">
+                  <div class="skill-name">
+                    <span>MySQL</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">7/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 40%">
+                  <div class="skill-name">
+                    <span>Firebase</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">4/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 30%">
+                  <div class="skill-name">
+                    <span>SQLite</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">3/10</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- <section class="section">
             <h2 class="section-title">
               <i class="fas fa-code"></i> TECHNICAL SKILLS
             </h2>
             <div class="skills-container">
-              <!-- Column 1 -->
               <div class="skill-category">
                 <div class="skill-item" style="--rating: 80%">
                   <div class="skill-name">
@@ -1078,9 +1395,18 @@
                     <span class="skill-rating">4/10</span>
                   </div>
                 </div>
+
+                <div class="skill-item" style="--rating: 50%">
+                  <div class="skill-name">
+                    <span>TypeScript</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">5/10</span>
+                  </div>
+                </div>
               </div>
 
-              <!-- Column 2 -->
               <div class="skill-category">
                 <div class="skill-item" style="--rating: 40%">
                   <div class="skill-name">
@@ -1113,7 +1439,6 @@
                 </div>
               </div>
 
-              <!-- Column 3 -->
               <div class="skill-category">
                 <div class="skill-item" style="--rating: 30%">
                   <div class="skill-name">
@@ -1135,28 +1460,58 @@
                   </div>
                 </div>
 
-                <div class="skill-item" style="--rating: 40%">
+                <div class="skill-item" style="--rating: 70%">
+                  <div class="skill-name">
+                    <span>Inertia.js</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">7/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 65%">
                   <div class="skill-name">
                     <span>Vue.js</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">6.5/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 65%">
+                  <div class="skill-name">
+                    <span>React</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">6.5/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 70%">
+                  <div class="skill-name">
+                    <span>MySQL</span>
+                  </div>
+                  <div class="skill-bar-container">
+                    <div class="skill-progress"></div>
+                    <span class="skill-rating">7/10</span>
+                  </div>
+                </div>
+
+                <div class="skill-item" style="--rating: 40%">
+                  <div class="skill-name">
+                    <span>Firebase</span>
                   </div>
                   <div class="skill-bar-container">
                     <div class="skill-progress"></div>
                     <span class="skill-rating">4/10</span>
                   </div>
                 </div>
-
-                <div class="skill-item" style="--rating: 40%">
-                  <div class="skill-name">
-                    <span>React</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">5/10</span>
-                  </div>
-                </div>
               </div>
             </div>
-          </section>
+          </section> -->
         </div>
 
         <!-- Main content -->
@@ -1164,15 +1519,35 @@
           <section class="section about">
             <h2 class="section-title"><i class="fas fa-user"></i> PROFILE</h2>
             <p>
-              A recent Bachelor of Science in Information Technology graduate
-              with a strong foundation in software development, web
-              technologies, and databases. Experienced in front-end and back-end
-              development, especially with Laravel, through academic projects
-              and internship collaboration.
+              I’m a software developer with experience in both front-end and
+              back-end development, skilled in
+              <a href="https://laravel.com/" target="_blank" class="tech-link"
+                >Laravel</a
+              >
+              for backend applications, paired with
+              <a href="https://vuejs.org/" target="_blank" class="tech-link"
+                >Vue</a
+              >
+              or
+              <a href="https://react.dev/" target="_blank" class="tech-link"
+                >React</a
+              >
+              for the frontend, connected through
+              <a href="https://inertiajs.com/" target="_blank" class="tech-link"
+                >Inertia.js</a
+              >. I also work with
+              <a href="https://flutter.dev/" target="_blank" class="tech-link"
+                >Flutter</a
+              >
+              for developing mobile applications. My background includes
+              creating and improving applications through academic projects and
+              internship collaborations, with a focus on building practical and
+              user-friendly solutions.
             </p>
             <p>
-              Passionate about building user-centered applications and eager to
-              grow as a Software Developer in a dynamic development team.
+              I’m passionate about solving problems through technology,
+              continuously learning new tools, and transforming ideas into
+              effective solutions.
             </p>
           </section>
 
@@ -1259,6 +1634,22 @@
     </div>
 
     <script>
+      // Intro animation sequence
+      document.addEventListener("DOMContentLoaded", function () {
+        const introContainer = document.getElementById("introContainer");
+
+        // After all animations complete (3.5 seconds total), fade out and remove the intro
+        setTimeout(() => {
+          introContainer.style.opacity = "0";
+          introContainer.style.transition = "opacity 0.5s ease";
+
+          // Remove the intro container after fade out completes
+          setTimeout(() => {
+            introContainer.remove();
+          }, 500);
+        }, 3500);
+      });
+
       document.querySelectorAll(".btn").forEach((button) => {
         // Add ripple effect
         button.addEventListener("click", function (e) {
