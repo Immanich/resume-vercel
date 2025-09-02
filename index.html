@@ -1161,6 +1161,37 @@
       .footer:hover .footer-content {
         opacity: 1;
       }
+
+      .portfolio-item {
+        background: var(--card-bg);
+        border-radius: 0.75rem;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1rem;
+        transition: transform 0.2s ease, background 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .portfolio-item:hover {
+        background: var(--hover-bg);
+        transform: translateY(-4px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+      }
+
+      .portfolio-link {
+        display: block; /* makes the whole card clickable */
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .portfolio-link:hover {
+        color: var(--accent-hover);
+      }
+
+      .project-title {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
     </style>
   </head>
   <body>
@@ -1570,6 +1601,47 @@
               </h3>
               <div class="company">Mater Dei College</div>
               <span class="duration">2021 - 2025</span>
+            </div>
+          </section>
+
+          <section class="section portfolio">
+            <h2 class="section-title">
+              <i class="fas fa-folder-open"></i> PORTFOLIO
+            </h2>
+            <div class="portfolio-item">
+              <h3 class="project-title">
+                <a
+                  href="https://project-react-shadcn-lucidereact.vercel.app/"
+                  target="_blank"
+                  class="portfolio-link"
+                >
+                  React + ShadCN + Lucide React Frontend Project
+                </a>
+              </h3>
+            </div>
+
+            <div class="portfolio-item">
+              <h3 class="project-title">
+                <a
+                  href="https://dilgbohol.com/"
+                  target="_blank"
+                  class="portfolio-link"
+                >
+                  DILG Bohol Official Website
+                </a>
+              </h3>
+            </div>
+
+            <div class="portfolio-item">
+              <h3 class="project-title">
+                <a
+                  href="https://issuances.dilgbohol.com/"
+                  target="_blank"
+                  class="portfolio-link"
+                >
+                  Tangkaraw DILG-BOHOL
+                </a>
+              </h3>
             </div>
           </section>
         </div>
