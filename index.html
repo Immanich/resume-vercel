@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lord Immanuel S. Juanich - Software Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -11,1741 +12,877 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#f0f9ff",
+                100: "#e0f2fe",
+                500: "#0ea5e9",
+                600: "#0284c7",
+                700: "#0369a1",
+                800: "#075985",
+                900: "#0c4a6e",
+              },
+              dark: {
+                50: "#f8fafc",
+                100: "#f1f5f9",
+                200: "#e2e8f0",
+                300: "#cbd5e1",
+                400: "#94a3b8",
+                500: "#64748b",
+                600: "#475569",
+                700: "#334155",
+                800: "#1e293b",
+                900: "#0f172a",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-up": "slideUp 0.5s ease-out",
+              "slide-down": "slideDown 0.5s ease-out",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { transform: "translateY(20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+              slideDown: {
+                "0%": { transform: "translateY(-20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+            },
+          },
+        },
+      };
+    </script>
     <style>
-      :root {
-        --primary: #1e293b;
-        --secondary: #0f172a;
-        --accent: #38bdf8;
-        --accent-hover: #7dd3fc;
-        --text: #e2e8f0;
-        --text-light: #1e293b;
-        --code-bg: #0f172a;
-        --card-bg: #1e293b;
-        --card-bg-light: #f8fafc;
-        --button-bg: rgba(56, 189, 248, 0.1);
-        --button-hover: rgba(56, 189, 248, 0.2);
-        --button-bg-light: rgba(56, 189, 248, 0.05);
-        --button-hover-light: rgba(56, 189, 248, 0.15);
-        --contact-bg: #1e293b;
-        --contact-bg-light: #f1f5f9;
-        --skill-bg: rgba(56, 189, 248, 0.1);
-        --skill-bg-light: rgba(56, 189, 248, 0.05);
-        --duration-color: #94a3b8;
-        --duration-color-light: #64748b;
-        --hover-bg: rgba(56, 189, 248, 0.1);
-        --hover-bg-light: rgba(56, 189, 248, 0.08);
+      .skill-progress {
+        transition: width 1s ease-in-out;
       }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
-
-      body {
-        font-family: "Fira Code", monospace, sans-serif;
-        background-color: var(--secondary);
-        color: var(--text);
-        line-height: 1.6;
-        overflow-x: hidden;
-        background-image: radial-gradient(
-            circle at 10% 20%,
-            rgba(56, 189, 248, 0.1) 0%,
-            transparent 20%
-          ),
-          radial-gradient(
-            circle at 90% 80%,
-            rgba(56, 189, 248, 0.1) 0%,
-            transparent 20%
-          );
-        transition: background-color 0.3s ease, color 0.3s ease;
+      .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
-
-      body.light-mode {
-        --primary: #f8fafc;
-        --secondary: #e2e8f0;
-        --text: #1e293b;
-        --code-bg: #f1f5f9;
-        --card-bg: #f8fafc;
-        --contact-bg: #f1f5f9;
-        --duration-color: #64748b;
-        background-color: var(--secondary);
-        background-image: radial-gradient(
-            circle at 10% 20%,
-            rgba(56, 189, 248, 0.05) 0%,
-            transparent 20%
-          ),
-          radial-gradient(
-            circle at 90% 80%,
-            rgba(56, 189, 248, 0.05) 0%,
-            transparent 20%
-          );
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
+      .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .project-card:hover {
+        transform: translateY(-5px);
+      }
+      .nav-link {
         position: relative;
       }
-
-      /* Terminal-like header */
-      header {
-        background-color: var(--primary);
-        border-radius: 8px 8px 0 0;
-        padding: 1rem 1.5rem;
-        display: flex;
-        align-items: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        position: relative;
-        border-bottom: 1px solid rgba(56, 189, 248, 0.3);
-        transition: background-color 0.3s ease;
-      }
-
-      .terminal-buttons {
-        display: flex;
-        gap: 8px;
-        margin-right: 15px;
-      }
-
-      .terminal-btn {
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        transition: transform 0.2s ease;
-      }
-
-      .terminal-btn:hover {
-        transform: scale(1.1);
-      }
-
-      .terminal-btn.red {
-        background-color: #ff5f56;
-      }
-      .terminal-btn.yellow {
-        background-color: #ffbd2e;
-      }
-      .terminal-btn.green {
-        background-color: #27c93f;
-      }
-
-      .header-title {
-        flex-grow: 1;
-        text-align: center;
-        font-size: 1.2rem;
-        color: var(--accent);
-        text-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
-        transition: all 0.3s ease;
-      }
-
-      .header-title:hover {
-        color: var(--accent-hover);
-        text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
-      }
-
-      /* Main content */
-      .resume-container {
-        background-color: var(--primary);
-        border-radius: 0 0 8px 8px;
-        padding: 2rem;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 2rem;
-        position: relative;
-        overflow: hidden;
-        transition: background-color 0.3s ease;
-      }
-
-      .resume-container::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #38bdf8, #818cf8, #38bdf8);
-        background-size: 200% 200%;
-        animation: gradient 3s ease infinite;
-      }
-
-      @keyframes gradient {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
-      /*PROFILE */
-      .profile-img-container {
-        width: 150px;
-        height: 150px;
-        margin: 0 auto 1rem;
-        border-radius: 50%;
-        border: 3px solid var(--accent);
-        overflow: hidden;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-      }
-
-      .profile-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: all 0.3s ease;
-      }
-
-      .profile-img-container:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
-        border-color: var(--accent-hover);
-      }
-
-      .profile-img-container:hover .profile-img {
-        transform: scale(1.1);
-      }
-
-      .light-mode .profile-img-container {
-        box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
-      }
-      /* Sidebar */
-      .sidebar {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-      }
-
-      .profile {
-        text-align: center;
-        position: relative;
-      }
-
-      .profile-img-placeholder {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        background-color: #334155;
-        margin: 0 auto 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 3px solid var(--accent);
-        transition: all 0.3s ease;
-        cursor: pointer;
-        overflow: hidden;
-      }
-
-      .light-mode .profile-img-placeholder {
-        background-color: #cbd5e1;
-      }
-
-      .profile-img-placeholder:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
-        border-color: var(--accent-hover);
-      }
-
-      .profile-img-placeholder i {
-        font-size: 3rem;
-        color: #64748b;
-        transition: all 0.3s ease;
-      }
-
-      .profile-img-placeholder:hover i {
-        color: var(--accent);
-        transform: scale(1.1);
-      }
-
-      .name {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-        color: var(--text);
-        transition: all 0.3s ease;
-      }
-
-      .name:hover {
-        color: var(--accent);
-      }
-
-      .title {
-        color: var(--accent);
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
-        position: relative;
-        display: inline-block;
-      }
-
-      .title::after {
+      .nav-link::after {
         content: "";
         position: absolute;
         bottom: -5px;
         left: 0;
         width: 0;
         height: 2px;
-        background-color: var(--accent);
+        background-color: #0ea5e9;
         transition: width 0.3s ease;
       }
-
-      .title:hover::after {
+      .nav-link:hover::after {
         width: 100%;
-      }
-
-      .contact-info {
-        background-color: var(--contact-bg);
-        padding: 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, background-color 0.3s ease;
-      }
-
-      .contact-info:hover {
-        transform: translateY(-5px);
-      }
-
-      .contact-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 1rem;
-        transition: all 0.3s ease;
-        padding: 0.5rem;
-        border-radius: 4px;
-        color: var(--text);
-      }
-
-      .contact-item:hover {
-        background-color: var(--hover-bg);
-        transform: translateX(5px);
-      }
-
-      .contact-item.clickable:hover {
-        background-color: var(--hover-bg);
-        transform: translateX(5px);
-        cursor: pointer; /* This changes to hand cursor */
-      }
-
-      /* Non-clickable items (like address) keep default cursor */
-      .contact-item:not(.clickable):hover {
-        cursor: default;
-      }
-
-      .light-mode .contact-item:hover {
-        background-color: var(--hover-bg-light);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      }
-
-      .job-description li:hover {
-        background-color: var(--hover-bg);
-        transform: translateX(5px);
-      }
-
-      .light-mode .job-description li:hover {
-        background-color: var(--hover-bg-light);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      }
-
-      .about p:hover {
-        background-color: var(--hover-bg);
-      }
-
-      .light-mode .about p:hover {
-        background-color: var(--hover-bg-light);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      }
-
-      .skill-tag:hover {
-        background-color: var(--button-hover);
-        color: var(--accent-hover);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(56, 189, 248, 0.2);
-      }
-
-      .light-mode .skill-tag:hover {
-        background-color: var(--button-hover-light);
-        box-shadow: 0 4px 8px rgba(56, 189, 248, 0.15);
-      }
-
-      .section:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-      }
-
-      .light-mode .section:hover {
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Buttons */
-      .action-buttons {
-        display: flex;
-        justify-content: center;
-      }
-
-      .btn {
-        padding: 0.7rem 1.5rem;
-        border-radius: 30px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: none;
-        font-family: "Fira Code", monospace;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-      }
-
-      .btn::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          45deg,
-          rgba(255, 255, 255, 0.1) 0%,
-          rgba(255, 255, 255, 0.3) 50%,
-          rgba(255, 255, 255, 0.1) 100%
-        );
-        background-size: 200% 200%;
-        opacity: 0;
-        transition: all 0.3s ease;
-        z-index: -1;
-      }
-
-      .btn:hover::before {
-        opacity: 1;
-        animation: shine 1.5s infinite;
-      }
-
-      @keyframes shine {
-        0% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: -100% 50%;
-        }
-      }
-
-      .btn-primary {
-        background-color: var(--accent);
-        color: var(--secondary);
-        box-shadow: 0 4px 6px rgba(56, 189, 248, 0.3);
-      }
-
-      .btn-primary:hover {
-        background-color: var(--accent-hover);
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(56, 189, 248, 0.4);
-      }
-
-      .light-mode .btn-primary {
-        color: white;
-      }
-
-      .btn-outline {
-        background-color: transparent;
-        color: var(--accent);
-        border: 2px solid var(--accent);
-        box-shadow: 0 2px 4px rgba(56, 189, 248, 0.2);
-      }
-
-      .btn-outline:hover {
-        background-color: rgba(56, 189, 248, 0.1);
-        color: var(--accent-hover);
-        border-color: var(--accent-hover);
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(56, 189, 248, 0.3);
-      }
-
-      .light-mode .btn-outline:hover {
-        background-color: rgba(56, 189, 248, 0.05);
-      }
-
-      /* Main content */
-      .main-content {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-      }
-
-      .section {
-        background-color: var(--card-bg);
-        padding: 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, background-color 0.3s ease;
-      }
-
-      .section:hover {
-        transform: translateY(-5px);
-      }
-
-      .section-title {
-        color: var(--accent);
-        margin-bottom: 1.5rem;
-        font-size: 1.3rem;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        transition: all 0.3s ease;
-      }
-
-      .section-title:hover {
-        color: var(--accent-hover);
-      }
-
-      .section-title i {
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-      }
-
-      .section-title:hover i {
-        transform: rotate(15deg);
-      }
-
-      .about p {
-        margin-bottom: 1rem;
-        line-height: 1.7;
-        transition: all 0.3s ease;
-        padding: 0.5rem;
-        border-radius: 4px;
-        color: var(--text);
-      }
-
-      .about p:hover {
-        background-color: rgba(56, 189, 248, 0.05);
-      }
-
-      .light-mode .about p:hover {
-        background-color: rgba(56, 189, 248, 0.03);
-      }
-
-      .experience-item,
-      .education-item {
-        margin-bottom: 1.5rem;
-        position: relative;
-        padding-left: 1.5rem;
-        border-left: 2px solid var(--accent);
-        transition: all 0.3s ease;
-      }
-
-      .experience-item:hover,
-      .education-item:hover {
-        border-left-color: var(--accent-hover);
-      }
-
-      .experience-item:last-child,
-      .education-item:last-child {
-        margin-bottom: 0;
-      }
-
-      .experience-item::before,
-      .education-item::before {
-        content: "";
-        position: absolute;
-        left: -8px;
-        top: 5px;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background-color: var(--accent);
-        box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-        transition: all 0.3s ease;
-      }
-
-      .experience-item:hover::before,
-      .education-item:hover::before {
-        background-color: var(--accent-hover);
-        transform: scale(1.2);
-      }
-
-      .job-title {
-        font-size: 1.1rem;
-        margin-bottom: 0.3rem;
-        color: var(--text);
-        transition: all 0.3s ease;
-      }
-
-      .job-title:hover {
-        color: var(--accent);
-      }
-
-      .company {
-        color: var(--accent);
-        margin-bottom: 0.3rem;
-        font-size: 0.95rem;
-        transition: all 0.3s ease;
-      }
-
-      .company:hover {
-        color: var(--accent-hover);
-      }
-
-      .duration {
-        color: var(--duration-color);
-        font-size: 0.85rem;
-        margin-bottom: 0.8rem;
-        display: block;
-        transition: all 0.3s ease;
-      }
-
-      .duration:hover {
-        color: var(--accent);
-      }
-
-      .job-description {
-        padding-left: 1rem;
-      }
-
-      .job-description li {
-        margin-bottom: 0.5rem;
-        position: relative;
-        list-style-type: none;
-        transition: all 0.3s ease;
-        padding: 0.3rem;
-        border-radius: 4px;
-        color: var(--text);
-      }
-
-      .job-description li:hover {
-        background-color: rgba(56, 189, 248, 0.05);
-        transform: translateX(5px);
-      }
-
-      .light-mode .job-description li:hover {
-        background-color: rgba(56, 189, 248, 0.03);
-      }
-
-      .job-description li::before {
-        content: "▹";
-        position: absolute;
-        left: -1rem;
-        color: var(--accent);
-        transition: all 0.3s ease;
-      }
-
-      .job-description li:hover::before {
-        color: var(--accent-hover);
-        transform: scale(1.2);
-      }
-
-      /* Code decoration */
-      .code-decoration {
-        position: absolute;
-        color: rgba(56, 189, 248, 0.05);
-        font-size: 12rem;
-        z-index: 0;
-        pointer-events: none;
-        font-family: "Fira Code", monospace;
-        transition: all 0.5s ease;
-      }
-
-      .light-mode .code-decoration {
-        color: rgba(56, 189, 248, 0.03);
-      }
-
-      .code-decoration:hover {
-        color: rgba(56, 189, 248, 0.1);
-      }
-
-      .code-1 {
-        top: 50px;
-        right: 50px;
-        transform: rotate(15deg);
-      }
-
-      .code-2 {
-        bottom: 50px;
-        left: 50px;
-        transform: rotate(-15deg);
-      }
-
-      /* Download button */
-      .download-btn {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        z-index: 100;
-        transition: all 0.3s ease;
-      }
-
-      .download-btn:hover {
-        transform: scale(1.05);
-      }
-
-      #floatingDownloadBtn {
-        padding: 0.8rem 1.8rem;
-        font-size: 1rem;
-        box-shadow: 0 6px 15px rgba(56, 189, 248, 0.4);
-      }
-
-      #floatingDownloadBtn:hover {
-        box-shadow: 0 8px 20px rgba(56, 189, 248, 0.6);
-      }
-
-      .btn:active {
-        transform: translateY(1px) !important;
-        box-shadow: 0 2px 4px rgba(56, 189, 248, 0.4) !important;
-        transition: all 0.1s ease;
-      }
-
-      .btn:hover i {
-        transform: scale(1.1);
-      }
-
-      @keyframes pulse-glow {
-        0%,
-        100% {
-          transform: scale(1);
-          box-shadow: 0 6px 15px rgba(56, 189, 248, 0.4);
-        }
-        50% {
-          transform: scale(1.05);
-          box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
-        }
-      }
-
-      .pulse {
-        animation: pulse-glow 2.5s ease-in-out infinite;
-      }
-
-      /* Theme toggle */
-      .theme-toggle {
-        position: fixed;
-        top: 2rem;
-        right: 2rem;
-        z-index: 100;
-        background-color: var(--button-bg);
-        color: var(--accent);
-        border: none;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .theme-toggle:hover {
-        background-color: var(--button-hover);
-        color: var(--accent-hover);
-        transform: rotate(30deg) scale(1.1);
-      }
-
-      /* Responsive design */
-      @media (max-width: 480px) {
-        .sidebar {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .profile {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding-bottom: 1rem;
-        }
-
-        .profile-img-container {
-          width: 120px;
-          height: 120px;
-          margin-bottom: 0.5rem;
-        }
-
-        .name {
-          font-size: 1.3rem;
-          margin-bottom: 0.3rem;
-        }
-
-        .title {
-          font-size: 1rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .contact-info {
-          margin-top: 0;
-          padding: 1rem;
-        }
-
-        .section {
-          padding: 1rem;
-        }
-
-        .section-title {
-          font-size: 1.1rem;
-          margin-bottom: 1rem;
-        }
-      }
-
-      @media (max-width: 900px) {
-        .resume-container {
-          grid-template-columns: 1fr;
-          padding: 1.5rem;
-        }
-
-        .sidebar {
-          order: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-        }
-
-        .profile {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding: 1rem;
-          background-color: var(--card-bg);
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-img-container {
-          margin: 0 auto;
-        }
-
-        .contact-info {
-          margin-top: 1rem;
-        }
-
-        .main-content {
-          order: 2;
-          margin-top: 1.5rem;
-        }
-
-        .download-btn {
-          bottom: 1rem;
-          right: 1rem;
-        }
-
-        .theme-toggle {
-          top: 1rem;
-          right: 1rem;
-        }
-
-        .code-decoration {
-          display: none;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .container {
-          padding: 0.5rem;
-        }
-
-        header {
-          padding: 0.8rem 1rem;
-        }
-
-        .resume-container {
-          padding: 1rem;
-        }
-
-        .profile {
-          flex-direction: column;
-          padding: 1rem;
-        }
-
-        .action-buttons {
-          margin-top: 1rem;
-        }
-
-        .btn {
-          padding: 0.6rem 1.2rem;
-          font-size: 0.9rem;
-        }
-
-        #floatingDownloadBtn {
-          padding: 0.7rem 1.2rem;
-          font-size: 0.9rem;
-        }
-
-        .skills-container {
-          flex-direction: column;
-          gap: 1rem;
-        }
-
-        .skill-category {
-          min-width: 100%;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .footer {
-          padding: 1.5rem 1rem;
-        }
-        .footer-content {
-          font-size: 0.8rem;
-        }
-
-        .hello-text {
-          font-size: 3rem;
-          letter-spacing: 0.2rem;
-          margin-bottom: 1.5rem;
-        }
-
-        .name-intro {
-          font-size: 1.8rem;
-          transform: translateY(30px); /* Smaller movement for mobile */
-          margin-bottom: 1rem;
-        }
-
-        .title-intro {
-          font-size: 1rem;
-          transform: translateX(50px); /* Smaller movement for mobile */
-          letter-spacing: 0.2rem;
-        }
-        .skills-container {
-          flex-direction: column;
-        }
-      }
-
-      @media (max-width: 375px) {
-        .hello-text {
-          font-size: 2.5rem;
-        }
-
-        .name-intro {
-          font-size: 1.5rem;
-        }
-
-        .title-intro {
-          font-size: 0.9rem;
-        }
-      }
-
-      .skill-group-title {
-        color: var(--accent);
-        margin-bottom: 1rem;
-        font-size: 1.1rem;
-        position: relative;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid rgba(56, 189, 248, 0.3);
-      }
-
-      .skill-group-title::after {
-        content: "";
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        width: 50px;
-        height: 2px;
-        background-color: var(--accent);
-      }
-
-      .skills-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-      }
-
-      .skill-category {
-        flex: 1;
-        min-width: 250px;
-      }
-
-      .skill-item {
-        margin-bottom: 1.2rem;
-      }
-
-      .skill-name {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.3rem;
-        font-size: 0.9rem;
-      }
-
-      .skill-bar-container {
-        height: 6px;
-        background-color: rgba(56, 189, 248, 0.1);
-        border-radius: 3px;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .skill-progress {
-        height: 100%;
-        background-color: var(--accent);
-        border-radius: 3px;
-        width: 0;
-        transition: width 0.5s ease-out;
-      }
-
-      .skill-rating {
-        position: absolute;
-        right: 0;
-        top: -20px;
-        font-size: 0.7rem;
-        color: var(--accent);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .section:hover .skill-rating {
-        opacity: 1;
-      }
-
-      .section:hover .skill-progress {
-        width: var(--rating);
-        box-shadow: 0 0 8px var(--accent);
-        animation: pulse-glow 1.5s infinite alternate;
-      }
-
-      /* Light mode adjustments */
-      .light-mode .skill-bar-container {
-        background-color: rgba(56, 189, 248, 0.05);
-      }
-
-      .light-mode .skill-rating {
-        color: var(--accent);
-      }
-
-      /* Animation */
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-
-      .floating {
-        animation: float 6s ease-in-out infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.05);
-        }
-      }
-
-      .pulse {
-        animation: pulse 3s ease-in-out infinite;
-      }
-
-      /* Animation styles for the intro sequence */
-      .intro-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: var(--secondary);
-        z-index: 9999;
-        pointer-events: none;
-        padding: 0 20px; /* Added padding for mobile */
-        box-sizing: border-box; /* Ensure padding is included in width */
-      }
-
-      .hello-text {
-        font-size: 5rem;
-        color: var(--accent);
-        opacity: 0;
-        animation: fadeIn 1.5s ease-in-out forwards;
-        margin-bottom: 2rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5rem;
-        text-align: center; /* Ensure text stays centered */
-      }
-
-      .name-intro {
-        font-size: 3rem;
-        color: var(--text);
-        transform: translateY(50px);
-        opacity: 0;
-        animation: slideUp 1s ease-in-out 1.5s forwards;
-        font-weight: 500;
-        margin-bottom: 1.5rem;
-        text-align: center;
-        line-height: 1.2; /* Better line spacing */
-      }
-
-      .title-intro {
-        font-size: 1.5rem;
-        color: var(--accent);
-        transform: translateX(100px);
-        opacity: 0;
-        animation: slideLeft 1s ease-in-out 2.5s forwards;
-        text-transform: uppercase;
-        letter-spacing: 0.3rem;
-        text-align: center;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      @keyframes slideUp {
-        from {
-          transform: translateY(50px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-
-      @keyframes slideLeft {
-        from {
-          transform: translateX(100px);
-          opacity: 0;
-        }
-        to {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-
-      .tech-link {
-        text-decoration: none;
-        color: #0073e6; /* Professional blue */
-        font-weight: 500;
-        transition: color 0.2s ease-in-out;
-      }
-      .tech-link:hover {
-        color: #005bb5; /* Darker shade on hover */
-      }
-
-      .footer {
-        color: var(--text);
-        padding: 1.5rem;
-        text-align: center;
-        width: 100%;
-        position: relative;
-        left: 0;
-        margin-top: 2rem;
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        font-size: 0.9rem;
-        opacity: 0.8;
-        transition: opacity 0.3s ease;
-      }
-
-      .footer:hover .footer-content {
-        opacity: 1;
-      }
-
-      .portfolio-item {
-        background: var(--card-bg);
-        border-radius: 0.75rem;
-        padding: 1rem 1.25rem;
-        margin-bottom: 1rem;
-        transition: transform 0.2s ease, background 0.2s ease,
-          box-shadow 0.2s ease;
-      }
-
-      .portfolio-item:hover {
-        background: var(--hover-bg);
-        transform: translateY(-4px);
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-      }
-
-      .portfolio-link {
-        display: block; /* makes the whole card clickable */
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      .portfolio-link:hover {
-        color: var(--accent-hover);
-      }
-
-      .project-title {
-        margin: 0;
-        font-size: 1.2rem;
-        font-weight: 600;
       }
     </style>
   </head>
-  <body>
-    <div class="intro-container" id="introContainer">
-      <div class="hello-text">HELLO</div>
-      <div class="name-intro">Lord Immanuel S. Juanich</div>
-      <div class="title-intro">SOFTWARE DEVELOPER</div>
-    </div>
-
-    <div class="container">
-      <!-- Terminal-like header -->
-      <header>
-        <div class="terminal-buttons">
-          <div class="terminal-btn red"></div>
-          <div class="terminal-btn yellow"></div>
-          <div class="terminal-btn green"></div>
+  <body class="bg-white text-dark-800 font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <a href="#" class="text-xl font-bold text-primary-600">Immanich</a>
+        <div class="hidden md:flex space-x-8">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#experience" class="nav-link">Experience</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#contact" class="nav-link">Contact</a>
         </div>
-        <div class="header-title">resume.jsx</div>
-      </header>
+        <button class="md:hidden">
+          <i class="fas fa-bars text-primary-600"></i>
+        </button>
+      </div>
+    </nav>
 
-      <div class="resume-container">
-        <!-- Code decorations -->
-        <div class="code-decoration code-1 floating">
-          { /* ReactComponent */ }
-        </div>
-        <div class="code-decoration code-2 floating">
-          <!-- VueComponent -->
-        </div>
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-          <div class="profile">
-            <div class="profile-img-container">
-              <img
-                src="2by2(edited).png"
-                alt="Lord Immanuel S. Juanich"
-                class="profile-img"
-              />
-            </div>
-            <h1 class="name">Lord Immanuel S. Juanich</h1>
-            <div class="title">SOFTWARE DEVELOPER</div>
-
-            <div class="action-buttons">
-              <button
-                class="btn btn-primary"
-                onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=immanichj@gmail.com', '_blank')"
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-16 pb-20">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-10 md:mb-0 animate-on-scroll">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-dark-900 mb-4"
+            >
+              Lord Immanuel S. Juanich
+            </h1>
+            <h2 class="text-xl md:text-2xl text-primary-600 mb-6">
+              Software Developer
+            </h2>
+            <p class="text-lg text-dark-600 mb-8 max-w-lg">
+              I build web and mobile applications with modern technologies like
+              Laravel, Vue, React, and Flutter.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#projects"
+                class="px-6 py-3 bg-primary-600 text-white rounded-lg shadow hover:bg-primary-700 transition"
+                >View Projects</a
               >
-                <i class="fas fa-paper-plane"></i> Hire Me
-              </button>
+              <a
+                href="#contact"
+                class="px-6 py-3 border border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition"
+                >Contact Me</a
+              >
             </div>
           </div>
-
-          <div class="contact-info">
-            <h3>CONTACT</h3>
-            <div
-              class="contact-item clickable"
-              onclick="navigator.clipboard.writeText('09104184566')"
-            >
-              <div class="contact-icon"><i class="fas fa-phone"></i></div>
-              <div>0910-418-4566</div>
-            </div>
-            <div
-              class="contact-item clickable"
-              onclick="navigator.clipboard.writeText('immanichj@gmail.com')"
-            >
-              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-              <div>immanichj@gmail.com</div>
-            </div>
-            <div class="contact-item clickable">
-              <div class="contact-icon">
-                <i class="fas fa-map-marker-alt"></i>
+          <div class="md:w-1/2 flex justify-center animate-on-scroll">
+            <div class="relative">
+              <div
+                class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl"
+              >
+                <img
+                  src="2by2(edited).png"
+                  alt="Lord Immanuel S. Juanich"
+                  class="w-full h-full object-cover"
+                />
               </div>
-              <div>Tubigon, Bohol</div>
-            </div>
-            <div
-              class="contact-item clickable"
-              onclick="window.open('https://www.facebook.com/immanich', '_blank')"
-            >
-              <div class="contact-icon"><i class="fab fa-facebook"></i></div>
-              <div>Facebook</div>
-            </div>
-            <div
-              class="contact-item clickable"
-              onclick="window.open('https://www.linkedin.com/in/immanich/', '_blank')"
-            >
-              <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-              <div>LinkedIn</div>
             </div>
           </div>
-
-          <section class="section">
-            <h2 class="section-title"><i class="fas fa-code"></i>SKILLS</h2>
-            <div class="skills-container">
-              <div class="skill-category">
-                <div class="skill-item" style="--rating: 80%">
-                  <div class="skill-name">
-                    <span>HTML5</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">8/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 80%">
-                  <div class="skill-name">
-                    <span>CSS</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">8/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 80%">
-                  <div class="skill-name">
-                    <span>Tailwind</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">8/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 50%">
-                  <div class="skill-name">
-                    <span>Bootstrap</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 50%">
-                  <div class="skill-name">
-                    <span>JavaScript</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 50%">
-                  <div class="skill-name">
-                    <span>TypeScript</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 40%">
-                  <div class="skill-name">
-                    <span>Java</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 70%">
-                  <div class="skill-name">
-                    <span>Dart</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">7/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 30%">
-                  <div class="skill-name">
-                    <span>PHP</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">3/10</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Column 2 - Frameworks -->
-              <div class="skill-category">
-                <h3 class="skill-group-title">Frameworks & Libraries</h3>
-                <div class="skill-item" style="--rating: 70%">
-                  <div class="skill-name">
-                    <span>Flutter</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">7/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 85%">
-                  <div class="skill-name">
-                    <span>Laravel(Blade)</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">8.5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 65%">
-                  <div class="skill-name">
-                    <span>Inertia.js</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">6.5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 65%">
-                  <div class="skill-name">
-                    <span>Vue.js</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">6.5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 50%">
-                  <div class="skill-name">
-                    <span>Next.js</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">5/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 65%">
-                  <div class="skill-name">
-                    <span>React</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">6.5/10</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Column 3 - Databases & Others -->
-              <div class="skill-category">
-                <h3 class="skill-group-title">Databases</h3>
-                <div class="skill-item" style="--rating: 70%">
-                  <div class="skill-name">
-                    <span>MySQL</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">7/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 40%">
-                  <div class="skill-name">
-                    <span>Firebase</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">4/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 30%">
-                  <div class="skill-name">
-                    <span>MongoDB</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">3/10</span>
-                  </div>
-                </div>
-
-                <div class="skill-item" style="--rating: 30%">
-                  <div class="skill-name">
-                    <span>SQLite</span>
-                  </div>
-                  <div class="skill-bar-container">
-                    <div class="skill-progress"></div>
-                    <span class="skill-rating">3/10</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <!-- Main content -->
-        <div class="main-content">
-          <section class="section about">
-            <h2 class="section-title"><i class="fas fa-user"></i> PROFILE</h2>
-            <p>
-              I’m a software developer with experience in both front-end and
-              back-end development, skilled in
-              <a href="https://laravel.com/" target="_blank" class="tech-link"
-                >Laravel</a
-              >
-              for backend applications, paired with
-              <a href="https://vuejs.org/" target="_blank" class="tech-link"
-                >Vue</a
-              >
-              or
-              <a href="https://react.dev/" target="_blank" class="tech-link"
-                >React</a
-              >
-              for the frontend, connected through
-              <a href="https://inertiajs.com/" target="_blank" class="tech-link"
-                >Inertia.js</a
-              >. I also work with
-              <a href="https://flutter.dev/" target="_blank" class="tech-link"
-                >Flutter</a
-              >
-              for developing mobile applications. My background includes
-              creating and improving applications through academic projects and
-              internship collaborations, with a focus on building practical and
-              user-friendly solutions.
-            </p>
-            <p>
-              I’m passionate about solving problems through technology,
-              continuously learning new tools, and transforming ideas into
-              effective solutions.
-            </p>
-          </section>
-
-          <section class="section experience">
-            <h2 class="section-title">
-              <i class="fas fa-briefcase"></i> WORK EXPERIENCE
-            </h2>
-
-            <div class="experience-item">
-              <h3 class="job-title">Software Development Intern</h3>
-              <div class="company">
-                DILG Bohol Provincial Office - Tagbilaran City
-              </div>
-              <span class="duration">January 2025 - April 2025</span>
-              <ul class="job-description">
-                <li>
-                  Migrated and enhanced the official website from Livewire to
-                  Inertia JS with Vue to improve responsiveness and
-                  maintainability.
-                </li>
-                <li>
-                  Improved the functionality of an existing mobile app and its
-                  admin panel using Flutter and Laravel with Blade aligning
-                  features with evolving client needs.
-                </li>
-                <li>
-                  Collaborated with fellow interns in a team environment,
-                  adhered to coding best practices, and utilized Git for version
-                  control across both projects.
-                </li>
-              </ul>
-            </div>
-
-            <div class="experience-item">
-              <h3 class="job-title">Full-Stack Developer</h3>
-              <div class="company">LGU Tubigon</div>
-              <span class="duration">August 2024 - December 2024</span>
-              <ul class="job-description">
-                <li>
-                  Designed user-friendly interfaces using Figma and developed
-                  mobile and web platforms for the HR office of LGU Tubigon.
-                </li>
-                <li>
-                  Built the mobile app with Flutter and the web system with
-                  Laravel(Blade) and MySQL, implementing authentication and key
-                  data features.
-                </li>
-                <li>
-                  Conducted user research and testing to align the system with
-                  client needs and improve usability, and collaborated with a
-                  team using Git for version control.
-                </li>
-              </ul>
-            </div>
-
-            <div class="experience-item">
-              <h3 class="job-title">Video Editor</h3>
-              <div class="company">Deep Animation Studio</div>
-              <span class="duration">August 2021 - May 2022</span>
-              <ul class="job-description">
-                <li>
-                  Edited and produced YouTube videos using Adobe Premiere Pro,
-                  collaborating with the creative team to deliver high-quality,
-                  engaging content on time and in line with platform standards.
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section class="section education">
-            <h2 class="section-title">
-              <i class="fas fa-graduation-cap"></i> EDUCATION
-            </h2>
-            <div class="education-item">
-              <h3 class="job-title">
-                Bachelor of Science in Information Technology
-              </h3>
-              <div class="company">Mater Dei College</div>
-              <span class="duration">2021 - 2025</span>
-            </div>
-          </section>
-
-          <section class="section portfolio">
-            <h2 class="section-title">
-              <i class="fas fa-folder-open"></i> PORTFOLIO
-            </h2>
-            <div class="portfolio-item">
-              <h3 class="project-title">
-                <a
-                  href="https://project-react-shadcn-lucidereact.vercel.app/"
-                  target="_blank"
-                  class="portfolio-link"
-                >
-                  React + ShadCN + Lucide React Frontend Project
-                </a>
-              </h3>
-            </div>
-
-            <div class="portfolio-item">
-              <h3 class="project-title">
-                <a
-                  href="https://dilgbohol.com/"
-                  target="_blank"
-                  class="portfolio-link"
-                >
-                  DILG Bohol Official Website
-                </a>
-              </h3>
-            </div>
-
-            <div class="portfolio-item">
-              <h3 class="project-title">
-                <a
-                  href="https://issuances.dilgbohol.com/"
-                  target="_blank"
-                  class="portfolio-link"
-                >
-                  Tangkaraw DILG-BOHOL
-                </a>
-              </h3>
-            </div>
-          </section>
         </div>
       </div>
+    </section>
 
-      <footer class="footer">
-        &copy; 2025 Lord Immanuel S. Juanich. <br />All rights reserved.
-      </footer>
-    </div>
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-dark-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">About Me</h2>
+        <div class="max-w-3xl mx-auto animate-on-scroll">
+          <p class="text-lg mb-6">
+            I'm a software developer with experience in both front-end and
+            back-end development, skilled in Laravel for backend applications,
+            paired with Vue or React for the frontend, connected through
+            Inertia.js. I also work with Flutter for developing mobile
+            applications.
+          </p>
+          <p class="text-lg mb-8">
+            My background includes creating and improving applications through
+            academic projects and internship collaborations, with a focus on
+            building practical and user-friendly solutions. I'm passionate about
+            solving problems through technology, continuously learning new
+            tools, and transforming ideas into effective solutions.
+          </p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div
+              class="group bg-white p-6 rounded-lg shadow text-center transition transform hover:scale-105 hover:shadow-lg hover:bg-primary-600 hover:text-white cursor-pointer"
+            >
+              <div
+                class="text-2xl text-primary-600 mb-2 group-hover:text-white"
+              >
+                <i class="fas fa-laptop-code"></i>
+              </div>
+              <div class="font-medium">Web Development</div>
+            </div>
+
+            <div
+              class="group bg-white p-6 rounded-lg shadow text-center transition transform hover:scale-105 hover:shadow-lg hover:bg-primary-600 hover:text-white cursor-pointer"
+            >
+              <div
+                class="text-2xl text-primary-600 mb-2 group-hover:text-white"
+              >
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <div class="font-medium">Mobile Apps</div>
+            </div>
+
+            <div
+              class="group bg-white p-6 rounded-lg shadow text-center transition transform hover:scale-105 hover:shadow-lg hover:bg-primary-600 hover:text-white cursor-pointer"
+            >
+              <div
+                class="text-2xl text-primary-600 mb-2 group-hover:text-white"
+              >
+                <i class="fas fa-database"></i>
+              </div>
+              <div class="font-medium">Database Design</div>
+            </div>
+
+            <div
+              class="group bg-white p-6 rounded-lg shadow text-center transition transform hover:scale-105 hover:shadow-lg hover:bg-primary-600 hover:text-white cursor-pointer"
+            >
+              <div
+                class="text-2xl text-primary-600 mb-2 group-hover:text-white"
+              >
+                <i class="fas fa-paint-brush"></i>
+              </div>
+              <div class="font-medium">UI/UX Design</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Work Experience</h2>
+        <div class="max-w-4xl mx-auto">
+          <div class="relative">
+            <!-- Timeline line -->
+            <div
+              class="absolute left-4 md:left-1/2 top-0 h-full w-1 bg-primary-200 transform -translate-x-1/2"
+            ></div>
+
+            <!-- Experience items -->
+            <div class="space-y-12 relative">
+              <!-- Experience 1 -->
+              <div
+                class="flex flex-col md:flex-row group opacity-0 translate-y-8 transition-all duration-700 ease-out animate-on-scroll"
+              >
+                <div
+                  class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0 relative"
+                >
+                  <div class="font-bold text-primary-600">
+                    January 2025 - April 2025
+                  </div>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                  <div
+                    class="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:scale-105 hover:bg-primary-600 hover:text-white cursor-pointer"
+                  >
+                    <h3 class="text-xl font-bold mb-2">
+                      Software Development Intern
+                    </h3>
+                    <div class="text-primary-600 mb-4 group-hover:text-white">
+                      DILG Bohol Provincial Office - Tagbilaran City
+                    </div>
+                    <ul class="list-disc list-inside space-y-2">
+                      <li>
+                        Migrated and enhanced the official website from Livewire
+                        to Inertia JS with Vue
+                      </li>
+                      <li>
+                        Improved functionality of an existing mobile app and its
+                        admin panel using Flutter and Laravel
+                      </li>
+                      <li>
+                        Collaborated with fellow interns in a team environment
+                        using Git for version control
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Experience 2 -->
+              <div
+                class="flex flex-col md:flex-row group opacity-0 translate-y-8 transition-all duration-700 ease-out animate-on-scroll"
+              >
+                <div
+                  class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0 relative"
+                >
+                  <div class="font-bold text-primary-600">
+                    August 2024 - December 2024
+                  </div>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                  <div
+                    class="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:scale-105 hover:bg-primary-600 hover:text-white cursor-pointer"
+                  >
+                    <h3 class="text-xl font-bold mb-2">Full-Stack Developer</h3>
+                    <div class="text-primary-600 mb-4 group-hover:text-white">
+                      LGU Tubigon
+                    </div>
+                    <ul class="list-disc list-inside space-y-2">
+                      <li>Designed user-friendly interfaces using Figma</li>
+                      <li>
+                        Built mobile app with Flutter and web system with
+                        Laravel (Blade) and MySQL
+                      </li>
+                      <li>
+                        Conducted user research and testing to align the system
+                        with client needs
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Experience 3 -->
+              <div
+                class="flex flex-col md:flex-row group opacity-0 translate-y-8 transition-all duration-700 ease-out animate-on-scroll"
+              >
+                <div
+                  class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0 relative"
+                >
+                  <div class="font-bold text-primary-600">
+                    August 2021 - May 2022
+                  </div>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                  <div
+                    class="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:scale-105 hover:bg-primary-600 hover:text-white cursor-pointer"
+                  >
+                    <h3 class="text-xl font-bold mb-2">Video Editor</h3>
+                    <div class="text-primary-600 mb-4 group-hover:text-white">
+                      Deep Animation Studio
+                    </div>
+                    <ul class="list-disc list-inside space-y-2">
+                      <li>
+                        Edited and produced YouTube videos using Adobe Premiere
+                        Pro
+                      </li>
+                      <li>
+                        Collaborated with the creative team to deliver
+                        high-quality, engaging content
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="py-16 bg-dark-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          Skills & Technologies
+        </h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div
+            class="bg-white p-6 rounded-lg shadow-md transition-all duration-700 ease-in-out hover:scale-105 hover:shadow-xl hover:bg-primary-600 hover:text-white cursor-pointer group animate-on-scroll"
+          >
+            <h3
+              class="text-xl font-bold mb-4 text-primary-600 group-hover:text-white transition-colors duration-500"
+            >
+              <i class="fas fa-code mr-2"></i>Programming Languages
+            </h3>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>HTML5/CSS</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >80%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="80%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>JavaScript/TypeScript</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >50%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="50%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Dart</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >70%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="70%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Java</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >40%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="40%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>PHP</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >30%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="30%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-lg shadow-md transition-all duration-700 ease-in-out hover:scale-105 hover:shadow-xl hover:bg-primary-600 hover:text-white cursor-pointer group animate-on-scroll"
+          >
+            <h3
+              class="text-xl font-bold mb-4 text-primary-600 group-hover:text-white transition-colors duration-500"
+            >
+              <i class="fas fa-cubes mr-2"></i>Frameworks & Libraries
+            </h3>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Laravel (Blade)</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >85%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="85%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Flutter</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >70%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="70%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Vue.js/Inertia.js</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >65%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="65%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>React</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >65%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="65%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Next.js</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >50%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="50%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-lg shadow-md transition-all duration-700 ease-in-out hover:scale-105 hover:shadow-xl hover:bg-primary-600 hover:text-white cursor-pointer group animate-on-scroll"
+          >
+            <h3
+              class="text-xl font-bold mb-4 text-primary-600 group-hover:text-white transition-colors duration-500"
+            >
+              <i class="fas fa-database mr-2"></i>Databases & Tools
+            </h3>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>MySQL</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >70%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="70%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Firebase</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >40%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="40%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>MongoDB</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >30%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="30%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>SQLite</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >30%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="30%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Git</span>
+                  <span class="text-primary-600 group-hover:text-white"
+                    >75%</span
+                  >
+                </div>
+                <div
+                  class="w-full rounded-full h-2 overflow-hidden bg-gray-200 group-hover:bg-gray-400 transition-colors duration-300"
+                >
+                  <div
+                    class="skill-progress bg-primary-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:bg-white"
+                    style="width: 0%"
+                    data-skill="75%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Featured Projects</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div
+            class="project-card bg-white rounded-lg overflow-hidden shadow-md animate-on-scroll"
+          >
+            <div
+              class="h-48 bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center"
+            >
+              <i class="fas fa-laptop-code text-white text-5xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">
+                React + ShadCN + Lucide React
+              </h3>
+              <p class="text-dark-600 mb-4">
+                Frontend project showcasing modern React development with
+                component libraries.
+              </p>
+              <a
+                href="https://project-react-shadcn-lucidereact.vercel.app/"
+                target="_blank"
+                class="text-primary-600 font-medium hover:underline inline-flex items-center"
+              >
+                View Project <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="project-card bg-white rounded-lg overflow-hidden shadow-md animate-on-scroll"
+          >
+            <div
+              class="h-48 bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center"
+            >
+              <i class="fas fa-globe text-white text-5xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">
+                DILG Bohol Official Website
+              </h3>
+              <p class="text-dark-600 mb-4">
+                Official website for DILG Bohol built with modern web
+                technologies.
+              </p>
+              <a
+                href="https://dilgbohol.com/"
+                target="_blank"
+                class="text-primary-600 font-medium hover:underline inline-flex items-center"
+              >
+                View Project <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="project-card bg-white rounded-lg overflow-hidden shadow-md animate-on-scroll"
+          >
+            <div
+              class="h-48 bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center"
+            >
+              <i class="fas fa-file-alt text-white text-5xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Tangkaraw DILG-BOHOL</h3>
+              <p class="text-dark-600 mb-4">
+                Document management system for DILG Bohol built with Laravel and
+                Vue.
+              </p>
+              <a
+                href="https://issuances.dilgbohol.com/"
+                target="_blank"
+                class="text-primary-600 font-medium hover:underline inline-flex items-center"
+              >
+                View Project <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-8 bg-dark-900 text-white">
+      <div
+        class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
+      >
+        <p class="text-center md:text-left">
+          &copy; 2025 Lord Immanuel S. Juanich. All rights reserved.
+        </p>
+
+        <div
+          class="flex flex-wrap items-center justify-center md:justify-end gap-6"
+        >
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-phone text-primary-500"></i>
+            <span>0910-418-4566</span>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-envelope text-primary-500"></i>
+            <span>immanichj@gmail.com</span>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-map-marker-alt text-primary-500"></i>
+            <span>Tubigon, Bohol</span>
+          </div>
+
+          <div class="flex space-x-4">
+            <a
+              href="https://www.facebook.com/immanich"
+              target="_blank"
+              class="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center hover:bg-primary-500 transition"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/immanich/"
+              target="_blank"
+              class="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center hover:bg-primary-500 transition"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a
+              href="https://github.com/immanich"
+              target="_blank"
+              class="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center hover:bg-primary-500 transition"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script>
-      // Intro animation sequence
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove("opacity-0", "translate-y-8");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+        observer.observe(el);
+      });
+
       document.addEventListener("DOMContentLoaded", function () {
-        const introContainer = document.getElementById("introContainer");
+        const animatedElements =
+          document.querySelectorAll(".animate-on-scroll");
 
-        // After all animations complete (3.5 seconds total), fade out and remove the intro
-        setTimeout(() => {
-          introContainer.style.opacity = "0";
-          introContainer.style.transition = "opacity 0.5s ease";
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+          }
+        );
 
-          // Remove the intro container after fade out completes
-          setTimeout(() => {
-            introContainer.remove();
-          }, 500);
-        }, 3500);
-      });
-
-      document.querySelectorAll(".btn").forEach((button) => {
-        // Add ripple effect
-        button.addEventListener("click", function (e) {
-          const rect = this.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-
-          const ripple = document.createElement("span");
-          ripple.className = "ripple";
-          ripple.style.left = `${x}px`;
-          ripple.style.top = `${y}px`;
-
-          this.appendChild(ripple);
-
-          setTimeout(() => {
-            ripple.remove();
-          }, 600);
+        animatedElements.forEach((element) => {
+          observer.observe(element);
         });
 
-        // Add temporary click effect
-        button.addEventListener("mousedown", function () {
-          this.style.transform = "translateY(2px)";
-          this.style.boxShadow = "0 2px 4px rgba(56, 189, 248, 0.4)";
-        });
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
 
-        button.addEventListener("mouseup", function () {
-          this.style.transform = "";
-          this.style.boxShadow = "";
-        });
+            const targetId = this.getAttribute("href");
+            if (targetId === "#") return;
 
-        button.addEventListener("mouseleave", function () {
-          this.style.transform = "";
-          this.style.boxShadow = "";
-        });
-      });
-
-      document.body.style.transition =
-        "background-color 0.3s ease, color 0.3s ease";
-
-      // Add hover effect to all elements with class 'hoverable'
-      document.querySelectorAll(".hoverable").forEach((item) => {
-        item.addEventListener("mouseenter", function () {
-          this.style.transform = "scale(1.05)";
-          this.style.boxShadow = "0 5px 15px rgba(56, 189, 248, 0.3)";
-        });
-
-        item.addEventListener("mouseleave", function () {
-          this.style.transform = "scale(1)";
-          this.style.boxShadow = "none";
-        });
-      });
-
-      // Copy to clipboard on contact items
-      document.querySelectorAll(".contact-item").forEach((item) => {
-        item.addEventListener("click", function () {
-          const text = this.innerText
-            .replace(this.querySelector(".contact-icon").innerText, "")
-            .trim();
-          navigator.clipboard.writeText(text).then(() => {
-            const originalText = this.innerHTML;
-            this.innerHTML =
-              '<span style="color: var(--accent)">Copied!</span>';
-            setTimeout(() => {
-              this.innerHTML = originalText;
-            }, 2000);
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: "smooth",
+              });
+            }
           });
         });
-      });
 
-      document.addEventListener("DOMContentLoaded", function () {
-        const skillsSection = document.querySelector(".section");
-        setTimeout(() => {
-          skillsSection.classList.add("hover-effect");
-          setTimeout(() => {
-            skillsSection.classList.remove("hover-effect");
-          }, 2000);
-        }, 1000);
+        const skillSections = document.querySelectorAll(
+          "#skills .animate-on-scroll"
+        );
+        const skillObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const skillBars =
+                  entry.target.querySelectorAll(".skill-progress");
+                skillBars.forEach((bar) => {
+                  bar.style.width =
+                    bar.parentElement.previousElementSibling.querySelector(
+                      ".text-primary-600"
+                    ).textContent;
+                });
+              }
+            });
+          },
+          {
+            threshold: 0.5,
+          }
+        );
+
+        skillSections.forEach((section) => {
+          skillObserver.observe(section);
+        });
       });
     </script>
   </body>
